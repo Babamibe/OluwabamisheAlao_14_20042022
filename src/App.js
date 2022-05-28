@@ -1,23 +1,25 @@
-import logo from './logo.svg';
+import { Route, Routes } from 'react-router-dom';
+import React from 'react';
 import './App.css';
+import EmployeeList from './pages/EmployeeList/EmployeeList';
+import Home from './pages/Home/Home';
+import { mockUsers } from './data/mockUsers';
 
 function App() {
+  const [employees, setEmployee] = React.useState(mockUsers)
+  function addNewEmployee(newEmployee) {
+    setEmployee([...employees, newEmployee])
+  }
+  console.log('Employee List', employees)
+  console.log('local storage', localStorage)
+  console.log("mock", mockUsers)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route path='/' element={<Home handleNewEmployee={addNewEmployee}/>} />
+        <Route path='/employee-list' element={<EmployeeList employees={employees} newEmployee={setEmployee}/>} />
+      </Routes>
+      
     </div>
   );
 }
