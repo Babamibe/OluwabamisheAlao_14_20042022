@@ -5,10 +5,12 @@ import 'react-calendar/dist/Calendar.css'
 function DatePicker({id, content, name, date, handleChange, handleDateChange}) {
     const [value, setValue] = React.useState(new Date())
     const [visible, setVisible] = React.useState(false)
+    //open calendar
     function showCalendar() {
         setVisible(prevState => !prevState)
     }
     
+    //pick a date and close calendar
     function closeCalendar(value) {
         setValue(value)
         setVisible(false)
@@ -16,9 +18,9 @@ function DatePicker({id, content, name, date, handleChange, handleDateChange}) {
 
     React.useEffect(() => {
         handleDateChange(name, value.toLocaleDateString())
+        //eslint-disable-next-line
     }, [value])
 
-    console.log('value', value.toLocaleDateString())
     return (
         <div>
             <label htmlFor={id}>{content}</label>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './EmployeeList.css'
 import DataTable from 'react-data-table-component';
+import './EmployeeList.css'
 import { columns } from '../../data/columns';
 import styled from 'styled-components'
 
@@ -48,17 +48,56 @@ const FilterComponent = ({ filterText, onFilter, onClear }) => (
     </>
 );
 
-function EmployeeList({employees}) {
+const customStyles = {
+    subHeader: {
+        style: {
+            backgroundColor: "#CDFAFF", 
+            marginBottom: "20px"
+        }
+    },
+    headCells: {
+        style: {
+            backgroundColor: "#CDFAFF",
+            filter: 'brightness(60%)',
+            fontWeight: "bold",
+            fontSize: "18px"
+        }
+    },
+    rows: {
+        style: {
+            backgroundColor: "#CDFAFF",
+            fontSize: "16px"
+        }
+    },
+    pagination: {
+        style: {
+            backgroundColor: "#CDFAFF"
+        }
+    },
+    noData: {
+        style: {
+            backgroundColor: "#CDFAFF"
+        }
+    }
+}
 
-
-    
+function EmployeeList({employees}) {    
 
     const [filterText, setFilterText] = React.useState('');
 	const [resetPaginationToggle, setResetPaginationToggle] = React.useState(false);
-	const filteredItems = employees.filter(
-		item => item.firstName && item.firstName.toLowerCase().includes(filterText.toLowerCase()),
-	);
 
+    //search function according to search input        
+	function search(rows) {
+        const columns = rows[0] && Object.keys(rows[0])
+        return rows.filter(
+            (row) => 
+                columns.some(
+                    (column) => row[column].toString().toLowerCase().indexOf(filterText.toLowerCase()) > -1
+                )
+            )
+    }
+
+    //handle when clear button clicked
 	const subHeaderComponentMemo = React.useMemo(() => {
 		const handleClear = () => {
 			if (filterText) {
@@ -78,16 +117,18 @@ function EmployeeList({employees}) {
         <>
             <div id="employee-div" className="container">
             <h1>Current Employees</h1>
-            <table id="employee-table" className="display"></table>
             <DataTable
             pagination
-            data={filteredItems}
+            data={search(employees)}
             columns={columns}
             subHeader
             subHeaderComponent={subHeaderComponentMemo}
             paginationResetDefaultPage={resetPaginationToggle}
+            striped={true}
+            highlightOnHover={true}
+            customStyles={customStyles}
             />
-            <Link to="/">Home</Link>
+            <Link className='link' to="/">Home</Link>
             </div>
         </>
     );

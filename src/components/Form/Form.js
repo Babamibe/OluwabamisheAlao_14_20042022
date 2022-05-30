@@ -5,7 +5,8 @@ import './Form.css'
 import { departments } from '../../data/departements';
 
 function Form({handleNewEmployee, setIsVisible}) {
-    const [formData, setFormData] = React.useState({
+    //initial state of data before input
+    const initialState = {
         firstName: "",
         lastName: "",
         dateOfBirth: "dd/mm/yyyy",
@@ -15,8 +16,10 @@ function Form({handleNewEmployee, setIsVisible}) {
         state: "",
         zipCode: "",
         department: ""
-    })
+    }
+    const [formData, setFormData] = React.useState(initialState)
 
+    //handle data input
     function handleChange(event) {
         const {name, value} = event.target
         setFormData(prevFormData => ({
@@ -25,20 +28,22 @@ function Form({handleNewEmployee, setIsVisible}) {
         }))
     }
 
+    //handle date picked
     function handleDateChange(name, value) {
         setFormData(prevFormData => ({
             ...prevFormData,
             [name]: value
         }))
     }
+
+    //handle form submission, create new employee, open confirmation modal and reset the form
     function handleSubmit(e) {
         e.preventDefault()
         handleNewEmployee(formData)
         setIsVisible(true)
-        console.log("saved")
+        setFormData(initialState)
     }
 
-    console.log('formData', formData)
     return (
         <>
             <form onSubmit={handleSubmit} id="create-employee">

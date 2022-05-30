@@ -8,10 +8,10 @@ function Home({handleNewEmployee}) {
     return (
         <>
             <div className='title'>
-                <h1>HRnet</h1>
+                <h1 className='title-header'>HRnet</h1>
             </div>
             <div className='container'>
-                <Link to='/employee-list'>View Current Employees</Link>
+                <Link className='link' to='/employee-list'>View Current Employees</Link>
                 <h2>Create Employee</h2>
                 <Form handleNewEmployee={handleNewEmployee} setIsVisible={setIsVisible}/>
                 <ModalComponent isVisible={isVisible} setIsVisible={setIsVisible}/>

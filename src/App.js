@@ -7,12 +7,11 @@ import { mockUsers } from './data/mockUsers';
 
 function App() {
   const [employees, setEmployee] = React.useState(mockUsers)
+  //udpate the employee array with new employee
   function addNewEmployee(newEmployee) {
     setEmployee([...employees, newEmployee])
   }
-  console.log('Employee List', employees)
-  console.log('local storage', localStorage)
-  console.log("mock", mockUsers)
+  
   return (
     <div className="App">
       <Routes>
