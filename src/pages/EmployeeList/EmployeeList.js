@@ -32,6 +32,9 @@ const ClearButton = styled.button`
     cursor:pointer;
 `;
 
+/** 
+ * create an input element to search the data table
+*/
 const FilterComponent = ({ filterText, onFilter, onClear }) => (
     <>
         <TextField
@@ -81,12 +84,21 @@ const customStyles = {
     }
 }
 
+/**
+ * Create a data table with the list of employees
+ * @param {Array} employees 
+ * @returns Component
+ */
 function EmployeeList({employees}) {    
 
     const [filterText, setFilterText] = React.useState('');
 	const [resetPaginationToggle, setResetPaginationToggle] = React.useState(false);
 
-    //search function according to search input        
+    /**
+     * Search function comparing the data in the table to the input
+     * @param {Array} rows 
+     * @returns Array
+     */        
 	function search(rows) {
         const columns = rows[0] && Object.keys(rows[0])
         return rows.filter(
@@ -97,8 +109,10 @@ function EmployeeList({employees}) {
             )
     }
 
-    //handle when clear button clicked
 	const subHeaderComponentMemo = React.useMemo(() => {
+        /**
+         * clear the search when clear button clicked
+         */
 		const handleClear = () => {
 			if (filterText) {
 				setResetPaginationToggle(!resetPaginationToggle);

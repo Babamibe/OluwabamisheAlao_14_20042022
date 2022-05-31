@@ -2,15 +2,31 @@ import React from 'react';
 import { Calendar } from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'
 
+/**
+ * create a date picker
+ * @param {Function} handleChange
+ * @param {Function} handleDateChange
+ * @param {String} id
+ * @param  {String} name
+ * @param {String} date
+ * @param {String} content
+ * @returns Component
+ */
 function DatePicker({id, content, name, date, handleChange, handleDateChange}) {
     const [value, setValue] = React.useState(new Date())
     const [visible, setVisible] = React.useState(false)
-    //open calendar
+    
+    /**
+     * open calendar
+     */
     function showCalendar() {
         setVisible(prevState => !prevState)
     }
     
-    //pick a date and close calendar
+    
+    /**
+     * pick a date and close calendar
+     */
     function closeCalendar(value) {
         setValue(value)
         setVisible(false)

@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import Form from '../../components/Form/Form';
 import ModalComponent from '../../components/ModalComponent/ModalComponent';
 
+/**
+ * create homepage 
+ * @param {Function} handleNewEmployee
+ */
 function Home({handleNewEmployee}) {
     const [isVisible, setIsVisible] = React.useState(false)
     return (

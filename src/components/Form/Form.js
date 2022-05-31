@@ -4,6 +4,12 @@ import {states} from '../../data/states'
 import './Form.css'
 import { departments } from '../../data/departements';
 
+/**
+ * Create a form
+ * @param {Function} handleNewEmployee
+ * @param {Function} setIsVisible 
+ * @returns Component
+ */
 function Form({handleNewEmployee, setIsVisible}) {
     //initial state of data before input
     const initialState = {
@@ -19,7 +25,11 @@ function Form({handleNewEmployee, setIsVisible}) {
     }
     const [formData, setFormData] = React.useState(initialState)
 
-    //handle data input
+    /**
+     * Handle input change
+     * @param {Event} event
+     * @listens Event 
+     */
     function handleChange(event) {
         const {name, value} = event.target
         setFormData(prevFormData => ({
@@ -28,7 +38,11 @@ function Form({handleNewEmployee, setIsVisible}) {
         }))
     }
 
-    //handle date picked
+    /**
+     * Handle date selection
+     * @param {String} name 
+     * @param {String} value 
+     */
     function handleDateChange(name, value) {
         setFormData(prevFormData => ({
             ...prevFormData,
@@ -36,7 +50,12 @@ function Form({handleNewEmployee, setIsVisible}) {
         }))
     }
 
-    //handle form submission, create new employee, open confirmation modal and reset the form
+    /**
+     * handle form submission, create new employee, open confirmation modal and reset the form
+     *  @param {Object} formData
+     *  @param {Event} e 
+     * @listens Event
+     */
     function handleSubmit(e) {
         e.preventDefault()
         handleNewEmployee(formData)

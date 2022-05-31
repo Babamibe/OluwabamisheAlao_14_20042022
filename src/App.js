@@ -7,7 +7,9 @@ import { mockUsers } from './data/mockUsers';
 
 function App() {
   const [employees, setEmployee] = React.useState(mockUsers)
-  //udpate the employee array with new employee
+  /**
+   * udpate the employee array with new employee entry
+   */
   function addNewEmployee(newEmployee) {
     setEmployee([...employees, newEmployee])
   }
